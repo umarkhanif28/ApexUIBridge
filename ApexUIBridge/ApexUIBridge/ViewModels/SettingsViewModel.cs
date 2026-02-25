@@ -1,0 +1,39 @@
+using ApexUIBridge.Core;
+using ApexUIBridge.Settings;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace ApexUIBridge.ViewModels;
+
+public class SettingsViewModel : ObservableObject, IDialogViewModel, ISettingViewModel {
+    private readonly ISettingsService<FlaUiAppSettings> _settingsService;
+
+    public SettingsViewModel() {
+        _settingsService = App.Services.GetRequiredService<ISettingsService<FlaUiAppSettings>>();
+        FlaUiAppSettings flaUiAppSettings = _settingsService.Load();
+        Settings = new Editable<FlaUiAppSettings>(flaUiAppSettings,
+                                                  s => (s.Clone() as FlaUiAppSettings)!,
+                                                  (from, to) => from.CopyTo(to),
+                                                  (a, b) => a.Equals(b));
+    }
+
+    public IEnumerable<string> Themes { get; } = new List<string> { "Light", "Dark" };
+    public IEnumerable<string> OverlayModes { get; } = new List<string> { "Fill", "Border" };
+
+    public void Save() {
+        _settingsService.Save(Settings.Current);
+    }
+    
+    public string Title { get; } = "Settings";
+    public string CloseButtonText { get; } = "Close";
+    public string SaveButtonText { get; } = "Save";
+    public bool IsSaveVisible { get; } = true;
+    public bool IsCloseVisible { get; } = true;
+
+    public bool CanClose { get; } = true;
+
+    public void Close() {
+
+    }
+
+    public Editable<FlaUiAppSettings> Settings { get; }
+}

@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows10.0.19041</TargetFramework>
+        <UseWPF>false</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Configurations>Debug;Release;UIA3;UIA2</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <PackageId>ApexUIBridge</PackageId>
+        <Authors>Brodowski, John</Authors>
+        <AssemblyName>ApexUIBridge</AssemblyName>
+        <RootNamespace>ApexUIBridge</RootNamespace>
+        <Product>ApexUIBridge</Product>
+        <Version>1.0.1</Version>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>bin\Debug\</OutputPath>
+        <AssemblyName>ApexUIBridge</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.26.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.3" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\FlaUI.Core\FlaUI.Core.csproj" />
+      <ProjectReference Include="..\FlaUI.UIA2\FlaUI.UIA2.csproj" />
+      <ProjectReference Include="..\FlaUI.UIA3\FlaUI.UIA3.csproj" />
+      <ProjectReference Include="..\LLamaSharp\LLamaSharp.csproj" />
+    </ItemGroup>
+
+</Project>
